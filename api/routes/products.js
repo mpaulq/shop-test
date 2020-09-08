@@ -1,54 +1,61 @@
 const express = require("express");
+let mysql = require("mysql");
 const router = express.Router();
 const pool = require("../modules/database");
 
-router.get("/products", (req, res) => {
-  pool.getConnection((err, connection) => {
-    if (err) {
-      res.json({
-        error: err,
-      });
+router.get("/", (req, res) => {
+  let { name, category, sort, order, discount, limit, offset } = req.query;
+  const discountCondition = discount? 0: -1;
+  let sql = 'SELECT * FROM product WHERE discount > ?';
+  let arguments = [discountCondition];
+  if(name) {
+    sql += ' AND name LIKE ?';
+    arguments.push('%'+name+'%');
+  }
+  if(category) {
+    sql += ' AND category = ?';
+    arguments.push(Number(category))
+  }
+  if(sort) {
+    if(!order){
+      order = 'ASC';
     }
-    connection.query(
-      `SELECT product.id, product.name AS product_name, product.url_image, product.price,
-            product.discount, category.id AS category_id, category.name AS category_name FROM product
-            JOIN category ON product.category = category.id ORDER BY category.id`,
-      (err, rows) => {
-        connection.release();
-        if (!err) {
-          res.json(rows);
-        } else {
-          res.json({
-            error: err,
-          });
-        }
-      }
-    );
-  });
-});
+    sql += ` ORDER BY ${sort} ${order}`;
+  } else {
+    sql += ' ORDER BY category ASC';
+  }
+  if(limit) {
+    if(!offset) {
+      offset = '0';
+    }
+    sql += ' LIMIT ?, ?';
+    arguments.push(Number(offset), Number(limit));
+  }
+  sql = mysql.format(sql, arguments);
 
-router.post("/searchproducts", (req, res) => {
-  const { searchField } = req.body;
   pool.getConnection((err, connection) => {
     if (err) {
-      res.json({
-        error: err,
+      res.status(500).json({
+        error: err
       });
     }
     connection.query(
-      `SELECT product.id, product.name AS product_name, product.url_image, product.price,
-            product.discount, category.id AS category_id, category.name AS category_name FROM product
-            JOIN category ON product.category = category.id AND product.name
-            LIKE ${connection.escape("%" + searchField + "%")} ORDER BY category.id`,
-      (err, rows) => {
+     sql, (err, rows, fields) => {
         connection.release();
-        if (!err) {
-          res.json(rows);
-        } else {
-          res.json({
-            error: err,
+        if (err) {
+          res.status(500).json({
+            error: err
           });
         }
+        res.status(200).json({
+          searchField: name,
+          sort: sort,
+          order: order,
+          discount: discount,
+          limit: limit,
+          offset: offset,
+          products: rows,
+        })
       }
     );
   });
