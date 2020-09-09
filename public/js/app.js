@@ -54,7 +54,7 @@ btnContainer.addEventListener('categoryLoaded', () => {
 
 const cardContainer = document.getElementById('card-container');
 const appendProduct = () => {
-    APIProducts(null, current[0].id, null, null, null, 8, null)
+    APIProducts(nameField, current[0].id, null, null, null, 8, null)
         .then(data => {
             console.log(data.products);
             data.products.forEach(product => {
@@ -86,6 +86,22 @@ const appendProduct = () => {
             })
         })
         .catch(err => console.log(err))
+}
+
+const inputSearch = document.getElementById('searchProd');
+const buttonSearch = document.getElementById('buttonSearch');
+let nameField = '';
+inputSearch.addEventListener('keyup', (e) => {
+    if(e.keyCode === 13) {
+        e.preventDefault();
+        buttonSearch.click();
+    }
+})
+
+const send = () => {
+    nameField = inputSearch.value;
+    cardContainer.innerHTML = '';
+    appendProduct();
 }
 
 appendCategory();
