@@ -1,10 +1,10 @@
 const APICategories = () => {
-    return fetch('http://localhost:3000/categories')
+    return fetch(process.env.APIURL + '/categories')
         .then(res => res.json())
 }
 
 const APIProducts = (name, category, discount, sort, order, limit = 8, offset) => {
-    let query = 'http://localhost:3000/products?';
+    let query = process.env.APIURL + '/products?';
     if(name) query += `name=${name}&`;
     if(category) query += `category=${category}&`;
     if(discount) query += `discount=${discount}&`;
