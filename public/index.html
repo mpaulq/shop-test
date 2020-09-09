@@ -3,11 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Bsale Test</title>
   </head>
-  <body>
+  <body">
+    <!-- Nav bar -->
+    <div class="nav">
+      <a href="#" class="logo">Bsale Test</a>
+      <a href="#" class="title">Tienda</a>
+      <div class="search-container">
+        <input type="text" id="searchProd" placeholder="Buscar">
+        <button><i class="fa fa-search" aria-hidden="true"></i></button>
+      </div>
+      <a href="#" class="shopping-cart"><i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i></a>
+      </ul>
+    </div>
+
+    
+
     <!-- App root -->
-    <div id="app"></div>
+    <div id="app" class="main">
+      <div id="btn-container">
+        <button class="btn active" id="">Todos</button>
+      </div>
+      <div id="card-container">
+        <div class="card">
+          
+        </div>
+      </div>
+    </div>
 
     <!-- Dependencies -->
     <script src="js/app.js"></script>
