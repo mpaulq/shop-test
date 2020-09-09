@@ -1,0 +1,138 @@
+.nav {
+  overflow: hidden;
+  background-color: #f2f2f2;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding-inline-end: 10%;
+}
+
+.nav a {
+  float: left;
+  display: block;
+  color: #333;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.logo {
+  margin-left: 10%;
+  font-size: x-large;
+}
+
+.title {
+  font-size: medium;
+  margin-top: 5px;
+}
+
+.nav a.shopping-cart {
+  float: right;
+}
+
+.nav .search-container {
+  float: right;
+  margin-right: 10%;
+}
+
+.nav input[type="text"] {
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  font-size: 17px;
+}
+
+.nav .search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #d7d7d7;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+#btn-container {
+  top: 75px;
+  position: fixed;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.btn:hover {
+  background-color: #ddd;
+}
+
+.btn.active {
+  background-color: #666;
+  color: white;
+}
+
+.main {
+  width: 75%;
+  margin: auto;
+  margin-top: 200px;
+}
+
+#card-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+  vertical-align: middle;
+}
+
+.card {
+  max-width: 22%;
+  padding: 5px;
+  margin: 5px;
+  text-align: center;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.discount {
+  border: none;
+  outline: 0;
+  padding: 12px 0 12px 0;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+#pag-buttons {
+  text-align: center;
+}
+
+#pag-buttons button {
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #d7d7d7;
+  font-size: 14px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  border: none;
+  cursor: pointer;
+}
+
+#pag-buttons .btn {
+  background-color: #cccccc;
+  color: #666666;
+}
