@@ -1,10 +1,12 @@
+const APIURL = window.location.href;
+
 const APICategories = () => {
-    return fetch(process.env.APIURL + '/categories')
+    return fetch(APIURL + 'categories')
         .then(res => res.json())
 }
 
 const APIProducts = (name, category, discount, sort, order, limit = 8, offset) => {
-    let query = process.env.APIURL + '/products?';
+    let query = APIURL + 'products?';
     if(name) query += `name=${name}&`;
     if(category) query += `category=${category}&`;
     if(discount) query += `discount=${discount}&`;
