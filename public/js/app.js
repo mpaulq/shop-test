@@ -43,6 +43,7 @@ btnContainer.addEventListener('categoryLoaded', () => {
     let btn = btnContainer.getElementsByClassName('btn');
     Array.from(btn).forEach(btn => {
         btn.addEventListener('click', function() {
+            currentOffset = 0;
             current[0].className = current[0].className.replace(' active', '');
             this.className += ' active';
             cardContainer.innerHTML = '';
@@ -54,9 +55,9 @@ btnContainer.addEventListener('categoryLoaded', () => {
 
 const cardContainer = document.getElementById('card-container');
 const appendProduct = () => {
-    APIProducts(nameField, current[0].id, null, null, null, 8, null)
+    APIProducts(nameField, current[0].id, null, null, null, 8, currentOffset)
         .then(data => {
-            console.log(data.products);
+            btnMore.style.display = !data.products.length? 'none': '';
             data.products.forEach(product => {
                 const card = document.createElement('div');
                 card.className = 'card';
@@ -102,6 +103,13 @@ const send = () => {
     nameField = inputSearch.value;
     cardContainer.innerHTML = '';
     appendProduct();
+}
+
+let currentOffset = 0;
+const btnMore = document.getElementById('btn-load');
+const loadMore = () => {
+    currentOffset += 8;
+    appendProduct()
 }
 
 appendCategory();
